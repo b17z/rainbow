@@ -278,7 +278,9 @@ export default function SpeedUpAndCancelSheet() {
     if (!isEmpty(gasPrices) && !calculatingGasLimit.current) {
       calculatingGasLimit.current = true;
       if (Number(gweiToWei(minGasPrice)) > Number(gasPrices.fast.value)) {
-        dispatch(updateGasPriceForSpeed('fast', gweiToWei(minGasPrice)));
+        dispatch(
+          updateGasPriceForSpeed(GasSpeedOption.fast, gweiToWei(minGasPrice))
+        );
       }
       const gasLimitForNewTx =
         type === CANCEL_TX ? ethUnits.basic_tx : tx.gasLimit;
@@ -438,7 +440,7 @@ export default function SpeedUpAndCancelSheet() {
                       minGasPrice={minGasPrice}
                       onCustomGasBlur={hideKeyboard}
                       onCustomGasFocus={showKeyboard}
-                      options={['fast', 'custom']}
+                      options={[GasSpeedOption.fast, GasSpeedOption.custom]}
                       theme={isDarkMode ? 'dark' : 'light'}
                       type="transaction"
                     />
